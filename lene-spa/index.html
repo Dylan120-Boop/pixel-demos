@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lene Spa · Spa en Santa Cruz</title>
+<meta name="description" content="Masajes, faciales y rituales de relajación en Equipetrol. Reserva tu momento y desconéctate.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f1ec;--bg2:#e8ece6;--ink:#22302a;--muted:#6b7a72;--acc:#5e7f6b;--acc2:#c9a877;--line:rgba(34,48,42,.12);--hA:#1f3129;--hB:#5e7f6b}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.ser{font-family:'Cormorant Garamond',Lora,Georgia,serif}
+.demo{position:fixed;top:0;left:0;right:0;z-index:40;background:var(--ink);color:var(--bg);font-size:11px;text-align:center;padding:6px 10px;letter-spacing:.02em}
+nav{position:fixed;top:27px;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 22px}
+.logo{font-family:'Cormorant Garamond',Lora,Georgia,serif;font-size:24px;color:#fff;font-weight:600}.logo span{color:var(--acc2)}
+.nav-cta{font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.6);color:#fff;padding:8px 14px;border-radius:999px}
+.hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;background:radial-gradient(120% 80% at 80% 10%,var(--hB) 0%,var(--hA) 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:120px 24px 56px}
+.orb{position:absolute;border-radius:50%;opacity:.25;border:1px solid rgba(255,255,255,.5)}
+.o1{width:420px;height:420px;right:-160px;top:60px}.o2{width:260px;height:260px;right:-40px;top:140px;background:rgba(255,255,255,.06)}.o3{width:640px;height:640px;left:-300px;top:-200px}
+.big{position:absolute;right:20px;top:150px;font-size:120px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35));animation:fl 5s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-12px)}}
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--acc2);margin-bottom:14px;font-weight:600}
+.hero h1{position:relative;font-family:'Cormorant Garamond',Lora,Georgia,serif;font-weight:600;font-size:44px;line-height:1.06;margin-bottom:16px}.hero h1 em{color:var(--acc2)}
+.hero p{position:relative;color:rgba(255,255,255,.88);font-size:16px;max-width:520px;margin-bottom:24px}
+.rating{position:relative;display:inline-flex;align-items:center;gap:8px;font-size:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 14px;border-radius:999px;margin-bottom:20px;align-self:flex-start}
+.stars{color:#f5c451;letter-spacing:2px}
+.btns{position:relative;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:600;font-size:15px}
+.btn-wa{background:#25d366;color:#08210f;box-shadow:0 10px 30px rgba(37,211,102,.35)}.btn-ghost{border:1px solid rgba(255,255,255,.45)}.wa-ic{width:20px;height:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:26px 24px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.stat{text-align:center}.stat b{display:block;font-family:'Cormorant Garamond',Lora,Georgia,serif;font-size:30px;color:var(--acc)}.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+section{padding:72px 24px}.sec-h{margin-bottom:28px}.sec-h h2{font-family:'Cormorant Garamond',Lora,Georgia,serif;font-weight:600;font-size:34px;line-height:1.1}.sec-h p{color:var(--muted);margin-top:10px}
+.services{display:grid;gap:12px}.svc{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+.svc .ic{flex:none;width:52px;height:52px;border-radius:14px;background:var(--bg2);display:grid;place-items:center;font-size:26px}.svc h3{font-size:17px;margin-bottom:2px}.svc p{font-size:14px;color:var(--muted)}
+.note{font-size:12px;color:var(--muted);margin-top:14px;font-style:italic}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}.chipx{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;font-weight:600;font-size:15px}.chipx span{display:block;font-size:26px;margin-bottom:6px}
+.hours{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}.hours div{display:flex;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);font-size:15px}.hours div:last-child{border:0}.hours .off{color:#c0392b}
+.gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:160px;gap:10px}
+.ph{border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:13px;font-weight:600;color:#fff;padding:12px;background:linear-gradient(160deg,var(--hB),var(--hA))}
+.ph span{font-size:34px}.ph.tall{grid-row:span 2}.ph.alt{background:linear-gradient(160deg,var(--acc2),var(--acc))}.ph.lt{background:linear-gradient(160deg,#fff,var(--bg2));color:var(--ink);border:1px solid var(--line)}
+.score{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px 24px;text-align:center}.score b{font-family:'Cormorant Garamond',Lora,Georgia,serif;font-size:64px;color:var(--acc);display:block;line-height:1}.score .stars{font-size:22px}.score p{color:var(--muted);margin:8px 0 16px}.score a{color:var(--acc);font-weight:600}
+.sum{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}.sum q{font-family:'Cormorant Garamond',Lora,Georgia,serif;font-size:19px;line-height:1.45;display:block;margin:6px 0 10px}.sum small{color:var(--muted)}
+.cta{text-align:center;padding:90px 24px;background:radial-gradient(120% 90% at 50% 0%,var(--hB),var(--hA));color:#fff}
+.cta h2{font-family:'Cormorant Garamond',Lora,Georgia,serif;font-weight:600;font-size:36px;line-height:1.1;margin-bottom:14px}.cta p{color:rgba(255,255,255,.85);margin-bottom:26px}
+.info{display:grid;gap:10px;margin-top:30px;font-size:14px;color:rgba(255,255,255,.9)}
+footer{padding:30px 24px 110px;text-align:center;font-size:12px;color:var(--muted)}
+.float-wa{position:fixed;right:18px;bottom:20px;z-index:30;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@media(min-width:900px){.hero h1{font-size:72px}.hero{padding:0 8vw 80px}section{padding:100px 8vw}.services{grid-template-columns:repeat(3,1fr)}.chips{grid-template-columns:repeat(4,1fr)}.gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:220px}.big{font-size:220px;right:10vw;top:20vh}}
+</style></head>
+<body>
+<svg style="display:none"><symbol id="wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.8 9.9 5.2 16 5.2s11 4.6 11 10.6-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.9 1.1 3.5.9 4.1.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.7-.4z"/></symbol></svg>
+<div class="demo">Demo de propuesta para Lene Spa · hecha por Pixel Studio Bolivia</div>
+<nav><div class="logo">Lene <span>Spa</span></div><a class="nav-cta" href="#reservar">Reservar</a></nav>
+<header class="hero">
+  <div class="orb o3"></div><div class="orb o1"></div><div class="orb o2"></div><div class="big">💆‍♀️</div>
+  <div class="eyebrow" style="position:relative">Spa · Equipetrol</div>
+  <h1>Un respiro en medio de la <em>ciudad</em></h1>
+  <div class="rating"><span class="stars">★★★★★</span> 4,6 · 64 reseñas en Google</div>
+  <p>Masajes, faciales y rituales de relajación en Equipetrol. Reserva tu momento y desconéctate.</p>
+  <div class="btns"><a class="btn btn-wa" href="https://wa.me/59177012972?text=Hola%20Lene%20Spa%2C%20quiero%20reservar%20un%20turno"><svg class="wa-ic"><use href="#wa"/></svg>Reservar por WhatsApp</a><a class="btn btn-ghost" href="#espacios">Ver más</a></div>
+</header>
+<div class="stats"><div class="stat"><b>4,6★</b><span>En Google</span></div><div class="stat"><b>64</b><span>Reseñas</span></div><div class="stat"><b>6</b><span>Días a la semana</span></div></div>
+<section id="espacios">
+  <div class="sec-h"><div class="eyebrow">Servicios</div><h2>Elige tu momento</h2><p>Tratamientos para relajarte, cuidar tu piel y recargar energía.</p></div>
+  <div class="services"><div class="svc"><div class="ic">💆‍♀️</div><div><h3>Masajes relajantes</h3><p>Para soltar el estrés de la semana.</p></div></div><div class="svc"><div class="ic">🌿</div><div><h3>Faciales</h3><p>Limpieza e hidratación para una piel luminosa.</p></div></div><div class="svc"><div class="ic">🪨</div><div><h3>Piedras calientes</h3><p>Calor y calma para músculos cansados.</p></div></div><div class="svc"><div class="ic">🕯️</div><div><h3>Rituales corporales</h3><p>Exfoliación e hidratación de pies a cabeza.</p></div></div><div class="svc"><div class="ic">🎁</div><div><h3>Gift cards</h3><p>El regalo perfecto para alguien especial.</p></div></div></div><p class="note">Servicios de ejemplo para la demo: se ajustan a lo que ofrece el spa.</p>
+</section>
+<section style="background:var(--bg2)">
+  <div class="sec-h"><div class="eyebrow">Horarios</div><h2>Te esperamos</h2></div><div class="hours"><div><span>Lunes a sábado</span><b class="">8:30 – 20:00</b></div><div><span>Domingo</span><b class="off">Cerrado</b></div></div>
+</section>
+<section>
+  <div class="sec-h"><div class="eyebrow">Galería</div><h2>Nuestro espacio</h2><p>Aquí irán las fotos reales del spa, sus cabinas y tratamientos.</p></div>
+  <div class="gallery"><div class="ph tall"><span>🌿</span>Recepción</div><div class="ph alt"><span>💆‍♀️</span>Cabina de masajes</div><div class="ph lt"><span>🕯️</span>Ambiente</div><div class="ph tall alt"><span>🪨</span>Piedras calientes</div><div class="ph lt"><span>🧴</span>Productos</div><div class="ph "><span>🎁</span>Gift cards</div></div>
+</section>
+<section style="background:var(--bg2)">
+  <div class="sec-h"><div class="eyebrow">Opiniones</div><h2>Lo que dicen sus clientas</h2></div>
+  <div class="score"><b>4,6</b><span class="stars">★★★★★</span><p>Promedio de 64 reseñas en Google Maps</p><a href="https://maps.google.com/?cid=8128000250467035027" target="_blank" rel="noopener">Leer las reseñas en Google →</a></div>
+</section>
+<section class="cta" id="reservar">
+  <div class="eyebrow">Reserva tu turno</div><h2>Regálate una hora solo para ti</h2><p>Escríbenos, elige día y hora, y listo.</p>
+  <a class="btn btn-wa" href="https://wa.me/59177012972?text=Hola%20Lene%20Spa%2C%20quiero%20reservar%20un%20masaje"><svg class="wa-ic"><use href="#wa"/></svg>Reservar por WhatsApp</a>
+  <div class="info"><div>📍 Barrio Equipetrol · Santa Cruz de la Sierra</div><div>📞 770 12972</div><div>🕒 Lunes a sábado: 8:30 – 20:00</div><div><a href="https://maps.google.com/?cid=8128000250467035027" target="_blank" rel="noopener" style="text-decoration:underline">Ver en Google Maps</a></div></div>
+</section>
+<footer>© Lene Spa · Página demo creada por Pixel Studio Bolivia</footer>
+<a class="float-wa" href="https://wa.me/59177012972?text=Hola%20Lene%20Spa%2C%20quiero%20reservar%20un%20turno" aria-label="WhatsApp"><svg style="width:30px;height:30px;color:#fff"><use href="#wa"/></svg></a>
+</body></html>
