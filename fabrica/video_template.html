@@ -82,7 +82,7 @@ body{font-family:Inter,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
 <div id="b1" class="abs blob" style="width:700px;height:700px;background:#1f6b3a"></div>
 <div id="b2" class="abs blob" style="width:600px;height:600px;background:#3b7d2a"></div>
 
-<div id="brand" class="abs"><div class="chip"><div class="pb">PB</div>Pixel Studio Bolivia</div></div>
+<div id="brand" class="abs"><div class="chip"><div class="pb">PB</div>Pixel Studio Bolivia</div><div class="chip" id="day" style="display:none;margin-left:16px;background:#d4ff3f;color:#0a0a0a;border-color:#d4ff3f;font-weight:900"></div></div>
 
 <!-- MAPS CARD (recreación, sin logos de Google) -->
 <div id="card" class="abs">
@@ -142,7 +142,7 @@ window.CFG = window.CFG || {};
 window.SEG = window.SEG || [[0,2.6],[2.7,4.2],[4.5,8.4],[8.7,11.6],[11.9,12.9],[13.2,17.6],[17.8,20.6],[21.1,23.2],[23.4,26.4]];
 window.LINES = (window.CFG.lines)||[];
 const $=id=>document.getElementById(id);
-function applyCfg(){const C=window.CFG;if(!C.name)return;$('cardimg').src=C.img;$('cname').textContent=C.name;$('ccount').textContent='('+C.reviews+')';$('ccat').textContent=C.category;$('caddr').textContent=C.address;$('cphone').textContent=C.phone;$('cextra').textContent=C.extra||'Muy bien valorado';$('rnum').dataset.r=C.rating;window.LINES=C.lines;if($('fr').getAttribute('src')!==C.demo)$('fr').setAttribute('src',C.demo);}
+function applyCfg(){const C=window.CFG;if(!C.name)return;$('cardimg').src=C.img;$('cname').textContent=C.name;$('ccount').textContent='('+C.reviews+')';$('ccat').textContent=C.category;$('caddr').textContent=C.address;$('cphone').textContent=C.phone;$('cextra').textContent=C.extra||'Muy bien valorado';$('rnum').dataset.r=C.rating;window.LINES=C.lines;if(C.q)C.q.forEach((x,i)=>$('q'+(i+1)).textContent=x);if(C.tags)C.tags.forEach((x,i)=>$('t'+(i+1)).innerHTML=x);if(C.day){$('day').textContent=C.day;$('day').style.display='inline-flex';}if($('fr').getAttribute('src')!==C.demo)$('fr').setAttribute('src',C.demo);}
 window.applyCfg=applyCfg;
 const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const pr=(t,a,b)=>cl((t-a)/(b-a));
