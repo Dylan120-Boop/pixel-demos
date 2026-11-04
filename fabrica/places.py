@@ -22,6 +22,7 @@ def post(url, body, mask):
         headers={"Content-Type": "application/json", "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": mask})
     return json.load(urllib.request.urlopen(req, timeout=30))
 
+os.makedirs(OUT, exist_ok=True)
 excl = set()
 if os.path.exists(EXCL):
     excl = {l.strip() for l in open(EXCL, encoding="utf-8") if l.strip()}
