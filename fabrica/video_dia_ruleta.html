@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8">
+<!-- Video «Día X» con ruleta de precios, antes / problema / solución, dominio y cierre. Blanco y negro.
+     Uso: servir la carpeta con http.server y renderizar con fabrica/render_dia.js (CFG, SEG, OUT). -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+body{font-family:Inter,system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+#bg{inset:0;background:radial-gradient(1000px 1000px at 50% 40%,#1a1a1a 0%,#000 70%)}
+#grid{inset:0;opacity:.06;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:90px 90px}
+#brand{top:64px;left:0;right:0;display:flex;justify-content:center;gap:14px}
+.chip{display:inline-flex;align-items:center;gap:14px;padding:12px 24px;border-radius:999px;border:1px solid rgba(255,255,255,.25);font-size:28px;font-weight:600;background:rgba(0,0,0,.4)}
+.pb{width:44px;height:44px;border-radius:12px;background:#fff;color:#000;display:grid;place-items:center;font-weight:900;font-size:21px}
+#daychip{background:#fff;color:#000;font-weight:900;border-color:#fff}
+#label{left:0;right:0;top:180px;display:flex;justify-content:center}
+#label span{font-size:34px;font-weight:800;letter-spacing:.18em;padding:12px 28px;border-radius:14px;border:2px solid #fff;white-space:nowrap}
+#label span.inv{background:#fff;color:#000}
+
+/* INTRO */
+#intro{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#dl{font-size:44px;font-weight:600;letter-spacing:.5em;color:#bbb;margin-left:.5em}
+#num{position:relative;height:420px;width:700px;overflow:hidden;margin:10px 0}
+#num div{position:absolute;left:0;right:0;font-size:420px;font-weight:900;line-height:420px;letter-spacing:-.06em}
+#sub{font-size:58px;font-weight:700;line-height:1.15;padding:0 90px;letter-spacing:-.01em}
+#sub em{font-style:normal;background:#fff;color:#000;padding:0 14px;border-radius:10px}
+#bar{width:0;height:6px;background:#fff;margin-top:50px;border-radius:9px}
+
+/* CARD */
+#card{left:110px;top:330px;width:860px;background:#fff;color:#111;border-radius:44px;overflow:hidden;box-shadow:0 60px 140px rgba(255,255,255,.08)}
+#card .ph{height:520px}
+#card .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+#card .body{padding:34px 44px 38px}
+#card h2{font-size:66px;font-weight:800;letter-spacing:-.03em}
+.rt{display:flex;align-items:center;gap:12px;font-size:36px;margin-top:6px;color:#333}
+.rt .st{letter-spacing:3px;color:#111}
+.cat{font-size:30px;color:#666;margin-top:6px}
+.row{display:flex;gap:20px;font-size:30px;padding:20px 0 0;color:#333}
+
+/* RULETA */
+#wheelwrap{left:90px;top:420px;width:900px;height:900px}
+#wheel{width:900px;height:900px;border-radius:50%;box-shadow:0 0 0 14px #fff,0 0 0 16px #000,0 0 0 20px #555}
+#hub{left:375px;top:375px;width:150px;height:150px;border-radius:50%;background:#000;border:10px solid #fff;display:grid;place-items:center;font-weight:900;font-size:44px}
+#pin{left:505px;top:372px;width:0;height:0;border-left:35px solid transparent;border-right:35px solid transparent;border-top:80px solid #fff;transform-origin:50% 0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.7))}
+#rtitle{left:0;right:0;top:250px;text-align:center;font-size:76px;font-weight:900;letter-spacing:-.03em}
+#result{left:90px;right:90px;top:1080px;padding:44px 50px;border-radius:40px;background:#fff;color:#000;text-align:center}
+#result .k{font-size:30px;letter-spacing:.3em;font-weight:700;color:#666}
+#result .p{font-size:128px;font-weight:900;letter-spacing:-.05em;line-height:1.05;margin-top:6px}
+#result .d{font-size:38px;font-weight:600;margin-top:6px}
+#result ul{list-style:none;display:flex;justify-content:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+#result li{font-size:28px;font-weight:600;border:2px solid #000;border-radius:999px;padding:8px 20px}
+.conf{width:18px;height:30px;border-radius:4px}
+
+/* PHONE */
+#phone{left:270px;top:300px;width:540px;height:1110px;border-radius:78px;background:#111;padding:16px;box-shadow:0 0 0 3px #3a3a3a,0 80px 160px rgba(0,0,0,.8)}
+#screen{width:100%;height:100%;border-radius:64px;overflow:hidden;position:relative;background:#000}
+#screen iframe{border:0;width:390px;height:844px;transform:scale(1.2821);transform-origin:0 0;position:absolute;left:0;top:0}
+#rec{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#shot{position:absolute;left:0;top:0;width:100%}
+#notch{position:absolute;top:24px;left:50%;width:150px;height:40px;margin-left:-75px;border-radius:30px;background:#000;z-index:5}
+.tag{display:inline-flex;align-items:center;gap:12px;padding:18px 28px;border-radius:24px;background:#fff;color:#000;font-size:38px;font-weight:800;box-shadow:0 26px 60px rgba(0,0,0,.6);white-space:nowrap}
+.tag.dark{background:#000;color:#fff;border:2px solid #fff}
+#finger{font-size:110px;margin:-20px 0 0 -30px;z-index:20}
+#tap{width:120px;height:120px;border-radius:50%;border:6px solid #fff;margin:-60px 0 0 -60px;z-index:19}
+
+/* WEB = TIKTOK */
+#tt{left:70px;right:70px;top:760px;background:#fff;color:#000;border-radius:36px;padding:40px 44px;box-shadow:0 40px 120px rgba(0,0,0,.7)}
+#tt small{font-size:28px;color:#666;letter-spacing:.1em;font-weight:700}
+#tt .u{font-size:40px;font-weight:700;margin-top:12px;word-break:break-all;line-height:1.25;position:relative}
+#tt .u i{position:absolute;left:-6px;top:50%;height:8px;background:#000;border-radius:9px}
+#ttbig{left:60px;right:60px;top:430px;text-align:center;font-size:84px;font-weight:900;letter-spacing:-.04em;line-height:1}
+
+/* PROBLEMA CHATS */
+.bub{padding:24px 32px;border-radius:34px;font-size:40px;font-weight:700;white-space:nowrap;box-shadow:0 26px 60px rgba(0,0,0,.6)}
+.bub small{display:block;font-size:24px;font-weight:600;letter-spacing:.12em;opacity:.6;margin-bottom:4px}
+.bw{background:#fff;color:#000}.bd{background:#1c1c1c;color:#fff;border:2px solid #444}
+
+/* DOMINIO */
+#browser{left:70px;right:70px;top:620px;border-radius:36px;background:#fff;color:#000;overflow:hidden;box-shadow:0 60px 140px rgba(255,255,255,.08)}
+#browser .top{display:flex;gap:12px;padding:26px 30px;background:#efefef}
+#browser .top i{width:22px;height:22px;border-radius:50%;background:#c9c9c9}
+#url{margin:26px 30px;padding:24px 28px;border-radius:22px;background:#f3f3f3;font-size:42px;font-weight:600;display:flex;gap:16px;align-items:center;white-space:nowrap;overflow:hidden}
+#url .cur{display:inline-block;width:4px;height:46px;background:#000;vertical-align:-8px}
+#bprev{height:560px;margin:0 30px 30px;border-radius:22px;overflow:hidden;position:relative;background:#0a0a0a}
+#bprev img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:.7}
+#bprev b{position:absolute;left:36px;bottom:36px;font-size:74px;font-weight:900;color:#fff;letter-spacing:-.04em;line-height:.95}
+#domtitle{left:60px;right:60px;top:330px;text-align:center;font-size:76px;font-weight:900;letter-spacing:-.04em;line-height:1.02}
+#domtitle small{display:block;font-size:30px;letter-spacing:.3em;color:#aaa;font-weight:700;margin-bottom:18px}
+
+/* END */
+#end{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 70px}
+#end h1{font-size:110px;font-weight:900;line-height:1;letter-spacing:-.045em}
+#end h1 em{font-style:normal;background:#fff;color:#000;padding:0 16px;border-radius:14px}
+#end .sub{font-size:46px;color:#cfcfcf;margin-top:40px;font-weight:500;line-height:1.3}
+#endlogo{display:flex;align-items:center;gap:26px;margin-top:70px}
+#endlogo .pb{width:120px;height:120px;border-radius:30px;font-size:58px}
+#endlogo .nm{text-align:left;font-size:50px;font-weight:800;line-height:1.05}
+#endlogo .nm small{display:block;font-size:32px;font-weight:500;color:#aaa;margin-top:8px}
+#endbtn{margin-top:60px;display:inline-flex;gap:18px;align-items:center;padding:34px 60px;border-radius:999px;background:#fff;color:#000;font-size:50px;font-weight:800}
+
+/* CAPTIONS */
+#cap{left:50px;right:50px;top:1500px;text-align:center;font-size:62px;font-weight:900;line-height:1.25;letter-spacing:-.01em;text-shadow:0 6px 24px rgba(0,0,0,.9)}
+#cap .w{display:inline-block;margin:0 .1em;padding:0 .12em;border-radius:12px;color:#9a9a9a}
+#cap .w.d{color:#fff}
+#cap .w.on{background:#fff;color:#000;text-shadow:none}
+#flash{inset:0;background:#fff;opacity:0;pointer-events:none}
+</style></head><body>
+<div id="bg" class="abs"></div><div id="grid" class="abs"></div>
+<div id="brand" class="abs"><div class="chip"><div class="pb">PB</div>Pixel Studio Bolivia</div><div class="chip" id="daychip"></div></div>
+<div id="label" class="abs"><span id="labtxt"></span></div>
+
+<div id="intro" class="abs"><div id="dl">DÍA</div><div id="num"><div id="n1"></div><div id="n2"></div></div><div id="sub">Creándole páginas web a negocios que <em>no tienen</em></div><div id="bar"></div></div>
+
+<div id="card" class="abs"><div class="ph"><img id="cimg"></div><div class="body"><h2 id="cname"></h2><div class="rt"><b id="rnum"></b><span class="st" id="rst">★★★★★</span><span id="ccount"></span></div><div class="cat" id="ccat"></div><div class="row">📍 <span id="caddr"></span></div></div></div>
+
+<div id="rtitle" class="abs">¿Qué página le toca?</div>
+<div id="wheelwrap" class="abs"><svg id="wheel" viewBox="-450 -450 900 900"></svg><div id="hub" class="abs">PB</div></div>
+<div id="pin" class="abs"></div>
+<div id="result" class="abs"><div class="k">LE TOCÓ</div><div class="p">1.500 Bs</div><div class="d">Página con reservas y panel</div><ul id="rlist"></ul></div>
+<div id="confs"></div>
+
+<div id="phone" class="abs"><div id="screen"><div id="notch"></div><img id="rec"><img id="shot"><iframe id="fr" scrolling="no"></iframe></div></div>
+
+<div id="ttbig" class="abs">Su web en Google:<br>un link de TikTok</div>
+<div id="tt" class="abs"><small>🌐 SITIO WEB</small><div class="u" id="ttu"><span id="ttt"></span><i id="ttl"></i></div></div>
+
+<div id="bubs"></div>
+
+<div id="domtitle" class="abs"><small>OPCIONAL</small>Con dominio propio</div>
+<div id="browser" class="abs"><div class="top"><i></i><i></i><i></i></div><div id="url">🔒 <span id="urlt"></span><span class="cur" id="ucur"></span></div><div id="bprev"><img id="bimg"><b id="bname"></b></div></div>
+
+<div id="tags"></div>
+<div id="tap" class="abs"></div><div id="finger" class="abs">👆</div>
+
+<div id="end" class="abs"><h1>¿Tu negocio <em>no tiene</em> página web?</h1><div class="sub" id="e2">Te muestro cómo quedaría la tuya.<br>Primero ves la demo, después decides.</div><div id="endlogo"><div class="pb">PB</div><div class="nm">Pixel Studio Bolivia<small>WhatsApp 7611 3430 · @ia.webs</small></div></div><div id="endbtn">💬 Escríbeme</div></div>
+
+<div id="cap" class="abs"></div>
+<div id="flash" class="abs"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), pr=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), eo5=x=>1-Math.pow(1-x,5), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const el=x=>x===0?0:x===1?1:Math.pow(2,-10*x)*Math.sin((x*10-.75)*(2*Math.PI)/3)+1;
+function set(id,o,tr){const e=typeof id==='string'?$(id):id;e.style.opacity=o;e.style.transform=tr||'';e.style.visibility=o<=.001?'hidden':'visible'}
+window.CFG=window.CFG||{};window.SEG=window.SEG||[];
+
+// ---- ruleta ----
+const SEGW=[{p:'400',l:'Informativa',c:'#fff',f:'#000'},{p:'700',l:'Con catálogo',c:'#000',f:'#fff'},{p:'1.500',l:'Reservas + panel',c:'#2a2a2a',f:'#fff'},
+            {p:'400',l:'Informativa',c:'#fff',f:'#000'},{p:'700',l:'Con catálogo',c:'#000',f:'#fff'},{p:'1.500',l:'Reservas + panel',c:'#2a2a2a',f:'#fff'}];
+(function(){let s='';const n=SEGW.length,R=440;SEGW.forEach((g,i)=>{const a0=(i/n)*2*Math.PI-Math.PI/2,a1=((i+1)/n)*2*Math.PI-Math.PI/2;
+ s+=`<path d="M0 0 L${R*Math.cos(a0)} ${R*Math.sin(a0)} A${R} ${R} 0 0 1 ${R*Math.cos(a1)} ${R*Math.sin(a1)} Z" fill="${g.c}" stroke="#777" stroke-width="2"/>`;
+ const am=(a0+a1)/2*180/Math.PI+90;
+ s+=`<g transform="rotate(${am})"><text y="-300" text-anchor="middle" fill="${g.f}" font-size="70" font-weight="900" font-family="Inter" letter-spacing="-3">${g.p}</text><text y="-245" text-anchor="middle" fill="${g.f}" font-size="30" font-weight="700" font-family="Inter">Bs</text><text y="-195" text-anchor="middle" fill="${g.f}" font-size="27" font-weight="600" font-family="Inter" opacity=".8">${g.l}</text></g>`;});
+ for(let i=0;i<24;i++){const a=i/24*2*Math.PI;s+=`<circle cx="${428*Math.cos(a)}" cy="${428*Math.sin(a)}" r="6" fill="#fff" stroke="#000" stroke-width="2"/>`}
+ $('wheel').innerHTML=s;})();
+const CF=[];for(let i=0;i<60;i++){const d=document.createElement('div');d.className='abs conf';d.style.background=i%3?'#fff':'#777';$('confs').appendChild(d);CF.push({e:d,x:540+(Math.random()-.5)*200,vx:(Math.random()-.5)*1600,vy:-900-Math.random()*1300,r:Math.random()*720})}
+
+function applyCfg(){const C=window.CFG;
+ $('daychip').textContent='DÍA '+C.day;$('n1').textContent=C.day-1;$('n2').textContent=C.day;
+ $('cimg').src=C.img;$('cname').textContent=C.name;$('ccount').textContent='('+C.reviews+')';$('ccat').textContent=C.category;$('caddr').textContent=C.address;
+ $('rlist').innerHTML=(C.features||[]).map(f=>`<li>${f}</li>`).join('');
+ $('ttt').textContent=C.website||'';$('bimg').src=C.img;$('bname').innerHTML=C.name.replace(' ','<br>');
+ if($('fr').getAttribute('src')!==C.demo)$('fr').setAttribute('src',C.demo);
+ // burbujas del problema de reservas
+ $('bubs').innerHTML=(C.bubbles||[]).map((b,i)=>`<div class="abs bub ${i%2?'bd':'bw'}" id="bb${i}"><small>${b[0]}</small>${b[1]}</div>`).join('');
+ // etiquetas
+ $('tags').innerHTML=(C.tags||[]).map((g,i)=>`<div class="abs tag ${g.dark?'dark':''}" id="tg${i}">${g.txt}</div>`).join('');
+}
+window.applyCfg=applyCfg;
+
+let OFF=null;
+function frDoc(){try{return $('fr').contentDocument}catch(e){return null}}
+function offsets(){const d=frDoc();if(!d||!d.querySelector('#reservar'))return null;const g=s=>d.querySelector(s).getBoundingClientRect().top+d.defaultView.scrollY;
+ return {precios:g('#precios'),reservar:g('#reservar'),panel:g('#panel'),max:d.documentElement.scrollHeight-844}}
+window.ready=()=>{OFF=offsets();return !!OFF};
+function elPos(sel){const d=frDoc();const e=d&&d.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();
+ return {x:270+16+(r.left+r.width/2)*1.2821,y:300+16+(r.top+r.height/2)*1.2821}}
+function seq(dir,n){return `${dir}/${String(Math.max(1,Math.min(n,9999))).padStart(4,'0')}.jpg`}
+let lastRec='',lastShot='';
+async function setImg(id,src,cache){if(!src){$(id).style.display='none';return}$(id).style.display='block';
+ if($(id).getAttribute('src')!==src){$(id).setAttribute('src',src);try{await $(id).decode()}catch(e){}}}
+
+window.render=async function(t){
+ const S=window.SEG,C=window.CFG;const L=i=>S[i][0],E=i=>S[i][1];const END=E(11)+1.4;
+ const K=C.k||{}; // tiempos internos (segundos absolutos) opcionales
+ // ---- etiqueta superior
+ let lab='',inv=false;
+ if(t>=L(4)-.2&&t<L(6)-.2){lab='ANTES'}
+ else if(t>=L(6)-.2&&t<K.sol1){lab='PROBLEMA 1'}
+ else if(t>=K.sol1&&t<L(7)-.2){lab='SOLUCIÓN';inv=true}
+ else if(t>=L(7)-.2&&t<K.sol2){lab='PROBLEMA 2'}
+ else if(t>=K.sol2&&t<L(8)-.2){lab='SOLUCIÓN';inv=true}
+ else if(t>=L(8)-.2&&t<L(9)-.2){lab='SOLUCIÓN';inv=true}
+ $('labtxt').textContent=lab;$('labtxt').className=inv?'inv':'';set('label',lab?1:0,`scale(${lab?1:.8})`);
+ $('brand').style.opacity=1-pr(t,L(10)-.2,L(10)+.3);
+
+ // ---- INTRO (L0)
+ const ii=pr(t,0,.4),io=pr(t,E(0)-.1,E(0)+.4);
+ set('intro',ii*(1-io),`scale(${(.9+.1*back(ii))*(1+io*.15)})`);
+ const flip=eio(pr(t,.5,1.1));$('n1').style.transform=`translateY(${-flip*420}px)`;$('n2').style.transform=`translateY(${(1-flip)*420}px)`;
+ const sp=pr(t,1.0,1.5);$('sub').style.opacity=sp;$('sub').style.transform=`translateY(${(1-eo(sp))*40}px)`;$('bar').style.width=(eo(pr(t,1.3,2.6))*700)+'px';
+ // ---- CARD (L1)
+ const ci=pr(t,L(1)-.2,L(1)+.5),co=pr(t,E(1),E(1)+.4);
+ set('card',ci*(1-co),`translateY(${(1-eo(ci))*200-co*100}px) scale(${(.85+.15*back(ci))*(1-co*.1)})`);
+ const rp=pr(t,L(1)+.3,L(1)+1.5);$('rnum').textContent=(C.rating*eo(rp)).toFixed(1).replace('.',',');$('rst').style.clipPath=`inset(0 ${100-eo(rp)*100}% 0 0)`;
+ // ---- RULETA (L2-L3)
+ const wi=pr(t,L(2)-.1,L(2)+.4),wo=pr(t,E(3)-.1,E(3)+.4);
+ const spin=pr(t,K.spin0||L(2)+1,L(3)-.05);const FINAL=360*6-150;const rot=eo5(spin)*FINAL;
+ $('wheel').style.transform=`rotate(${rot}deg)`;
+ const z=eio(pr(t,L(3),L(3)+.6));
+ set('wheelwrap',wi*(1-wo),`scale(${(.6+.4*back(wi))*(1-.25*z)}) translateY(${-z*290}px)`);
+ const peg=(rot%15)/15;set('pin',wi*(1-wo),`translateY(${-z*215}px) rotate(${spin>0&&spin<1?-Math.max(0,1-peg*4)*18:0}deg)`);
+ set('rtitle',wi*(1-pr(t,L(3)-.2,L(3)+.1)),`translateY(${(1-eo(wi))*-40}px)`);
+ const r=pr(t,L(3),L(3)+.45);set('result',r*(1-wo),`translateY(${(1-eo(r))*200}px) scale(${.8+.2*back(r)})`);
+ $('flash').style.opacity=.6*Math.max(0,1-Math.abs(t-L(3))/.15)+.35*Math.max(0,1-Math.abs(t-K.sol1)/.12)+.35*Math.max(0,1-Math.abs(t-K.sol2)/.12);
+ const cf=pr(t,L(3),L(3)+2.2);CF.forEach(f=>{const tt=cf*2.2;f.e.style.left=(f.x+f.vx*tt*.5)+'px';f.e.style.top=(900+f.vy*tt+1400*tt*tt)+'px';f.e.style.opacity=cf>0&&cf<1?1:0;f.e.style.transform=`rotate(${f.r*tt}deg)`});
+
+ // ---- PHONE (L4 .. L8)
+ const pi=pr(t,L(4)-.2,L(4)+.4),po=pr(t,E(8),E(8)+.4);
+ const ttOn=t>=L(5)-.1&&t<L(6)-.2; // en L5 el teléfono se aparta
+ const pAway=eio(pr(t,L(5)-.2,L(5)+.3))*(1-eio(pr(t,L(6)-.4,L(6)+.1)));
+ set('phone',pi*(1-po),`perspective(2000px) translateY(${(1-eo(pi))*900}px) rotateX(${(1-eo(pi))*25}deg) translateX(${pAway*-1150}px) rotate(${pAway*-14}deg) scale(${(.9+.1*back(pi))*(1-po*.2)})`);
+ // contenido del teléfono
+ let rec=null,shot=null,showFr=false,shotY=0;
+ if(t<L(5)){const mid=(L(4)+E(4))/2;if(t<mid||!C.rec2){const f=Math.floor((t-L(4)+.2)*30*(C.rec1Speed||2));rec=seq('rec1',f+1)}else{const f=Math.floor((t-mid)*30*(C.rec2Speed||1.5));rec=seq('rec2',f+1)}}
+ else if(t<L(6)-.1){rec=null}
+ else if(t<K.sol1){shot=C.shotPrecios;shotY=-eio(pr(t,L(6),K.sol1))*260}
+ else showFr=true;
+ await setImg('rec',rec);await setImg('shot',shot);$('shot').style.transform=`translateY(${shotY}px)`;
+ $('fr').style.visibility=showFr?'visible':'hidden';
+ // ---- WEB = TIKTOK (L5)
+ const ti=pr(t,L(5)-.1,L(5)+.4),to=pr(t,E(5)-.1,E(5)+.3);
+ set('ttbig',ti*(1-to),`translateY(${(1-eo(ti))*-40}px)`);
+ set('tt',ti*(1-to),`translateY(${(1-eo(ti))*120}px) rotate(${-2*(1-eo(ti))}deg)`);
+ const strike=eo(pr(t,L(5)+1.2,L(5)+1.8));$('ttl').style.width=(strike*102)+'%';
+ // ---- burbujas problema 2
+ const bubs=(C.bubbles||[]);bubs.forEach((b,i)=>{const a=L(7)+.3+i*.55,p=pr(t,a,a+.35),o=pr(t,K.sol2-.3,K.sol2);
+  const e=$('bb'+i);if(!e)return;e.style.left=b[2]+'px';e.style.top=b[3]+'px';set(e,p*(1-o),`scale(${back(p)*(1-o*.3)}) rotate(${(i%2?3:-3)+Math.sin((t-a)*6)*1.5}deg)`)});
+ // el teléfono se aparta durante el problema 2
+ if(t>=L(7)-.3&&t<K.sol2+.3){const aw=eio(pr(t,L(7)-.3,L(7)+.2))*(1-eio(pr(t,K.sol2-.3,K.sol2+.3)));
+  $('phone').style.transform+=` translateY(${aw*1800}px)`}
+ // ---- scroll del demo
+ if(OFF&&showFr){const k=[[K.sol1,OFF.precios-80],[L(7)-.4,OFF.precios-80],[K.sol2,OFF.reservar-80],[K.sol2+1.6,OFF.reservar-80],[K.sol2+2.6,OFF.reservar+260],[E(7)-.3,OFF.reservar+520],[L(8),OFF.panel-60],[E(8),OFF.panel+40]];
+  let y=k[0][1];for(let i=0;i<k.length-1;i++){if(t>=k[i][0]&&t<=k[i+1][0]){y=k[i][1]+(k[i+1][1]-k[i][1])*eio(pr(t,k[i][0],k[i+1][0]));break}if(t>k[i+1][0])y=k[i+1][1]}
+  $('fr').contentWindow.scrollTo(0,Math.min(y,OFF.max))}
+ // ---- toques (menú + reservas)
+ const taps=C.taps||[];const W=$('fr').contentWindow;let fpos=null,lastTap=null,nextTap=null;
+ if(W&&W.demo){W.demo.reset&&W.demo.reset();taps.forEach(tp=>{if(t>=tp.t)W.demo[tp.fn](...tp.args)})}
+ for(const tp of taps){if(tp.t<=t)lastTap=tp;else{nextTap=tp;break}}
+ const fOn=showFr&&!(t>=L(7)-.3&&t<K.sol2)&&taps.length&&t>=taps[0].t-.7&&t<=taps[taps.length-1].t+.6;
+ if(fOn){const tgt=nextTap&&t>nextTap.t-.55?nextTap:lastTap||taps[0];const pos=elPos(tgt.sel);
+  if(pos){const prevP=lastTap&&tgt!==lastTap?elPos(lastTap.sel):null;let x=pos.x,y=pos.y;
+   if(nextTap&&tgt===nextTap&&prevP){const m=eio(pr(t,nextTap.t-.55,nextTap.t-.05));x=prevP.x+(pos.x-prevP.x)*m;y=prevP.y+(pos.y-prevP.y)*m}
+   $('finger').style.left=x+'px';$('finger').style.top=y+'px';fpos={x,y}}}
+ set('finger',fOn&&fpos?1:0,`scale(${lastTap&&t-lastTap.t<.15?.85:1})`);
+ const rp2=lastTap?pr(t,lastTap.t,lastTap.t+.5):1;if(fpos){$('tap').style.left=fpos.x+'px';$('tap').style.top=fpos.y+'px'}
+ set('tap',fOn&&rp2>0&&rp2<1?1-rp2:0,`scale(${.3+rp2*1.6})`);
+ // ---- etiquetas
+ (C.tags||[]).forEach((g,i)=>{const p=pr(t,g.a,g.a+.35),o=pr(t,g.b-.25,g.b);const e=$('tg'+i);e.style.left=g.x+'px';e.style.top=g.y+'px';
+  set(e,p*(1-o),`scale(${back(p)}) rotate(${g.r||0}deg) translateY(${Math.sin(t*3+i)*6}px)`)});
+ // ---- DOMINIO (L9)
+ const di=pr(t,L(9)-.2,L(9)+.4),dO=pr(t,E(9)-.1,E(9)+.3);
+ set('domtitle',di*(1-dO),`translateY(${(1-eo(di))*-40}px)`);set('browser',di*(1-dO),`translateY(${(1-eo(di))*200}px) scale(${.9+.1*back(di)})`);
+ const old=C.website||'',nw=C.domain||'';const del=pr(t,L(9)+.6,L(9)+1.4),typ=pr(t,L(9)+1.6,L(9)+3.0);
+ $('urlt').textContent=typ>0?nw.slice(0,Math.round(nw.length*typ)):old.slice(0,Math.round(old.length*(1-del)));
+ $('ucur').style.opacity=(Math.floor(t*3)%2)?1:.2;$('bprev').style.opacity=.25+.75*eo(pr(t,L(9)+3.0,L(9)+3.5));
+ // ---- END (L10-L11)
+ const e1=pr(t,L(10)-.1,L(10)+.4);set('end',e1,'');
+ const e2=pr(t,L(11),L(11)+.5);$('e2').style.opacity=e2;
+ const e3=pr(t,L(11)+.4,L(11)+1);$('endlogo').style.opacity=e3;$('endlogo').style.transform=`scale(${.8+.2*back(e3)})`;
+ const e4=pr(t,L(11)+.9,L(11)+1.4);$('endbtn').style.opacity=e4;$('endbtn').style.transform=`scale(${(.7+.3*back(e4))*(1+.04*Math.sin(t*7)*e4)})`;
+ // ---- SUBTÍTULOS
+ let html='';
+ for(let i=0;i<S.length&&i<10;i++){const [a,b]=S[i];if(t>=a-.05&&t<=b+.25){
+  const words=C.lines[i].split(' ');const tot=words.reduce((s,w)=>s+w.length+2,0);const p=pr(t,a,b);let acc=0,cur=-1;
+  words.forEach((w,j)=>{acc+=w.length+2;if(cur<0&&p*tot<=acc)cur=j});if(cur<0)cur=words.length-1;
+  const ch=Math.floor(cur/4);html=words.slice(ch*4,ch*4+4).map((w,j)=>{const k=ch*4+j;return `<span class="w ${k===cur?'on':k<cur?'d':''}">${w}</span>`}).join(' ');break}}
+ $('cap').innerHTML=html;$('cap').style.top=(t>=L(4)-.2&&t<L(9)-.2&&!(t>=L(5)-.1&&t<L(6)-.2))?'1500px':'1560px';
+ return END;
+};
+if(!new URLSearchParams(location.search).get('render')){}
+</script></body></html>

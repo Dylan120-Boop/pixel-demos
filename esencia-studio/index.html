@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esencia Studio · Barbería en Santa Cruz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--k:#0a0a0a;--k2:#141414;--k3:#1f1f1f;--g1:#2e2e2e;--g2:#6b6b6b;--g3:#a3a3a3;--g4:#d9d9d9;--w:#fafafa;--line:rgba(255,255,255,.12)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--k);color:var(--w);font-family:Inter,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .demo-bar{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--w);color:var(--k);font-size:11.5px;text-align:center;padding:7px 12px;font-weight:500}
+  nav{position:fixed;top:30px;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:rgba(10,10,10,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logo{font-weight:900;font-size:20px;letter-spacing:.14em}
+  .logo small{display:block;font-size:9px;letter-spacing:.5em;font-weight:600;color:var(--g3);margin-top:-2px;text-align:right}
+  .nav-cta{font-size:13px;font-weight:700;background:var(--w);color:var(--k);padding:9px 15px;border-radius:999px}
+
+  .hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+  .hero img{position:absolute;inset:0;filter:grayscale(1) contrast(1.05)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.15) 0%,rgba(10,10,10,.3) 35%,rgba(10,10,10,.97) 82%)}
+  .hero-c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:0 22px 48px}
+  .eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--g3);font-weight:700;margin-bottom:14px}
+  .hero h1{font-size:50px;font-weight:900;line-height:.95;letter-spacing:-.045em;margin-bottom:16px}
+  .hero h1 span{color:var(--g3)}
+  .rating{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;border:1px solid var(--line);background:rgba(255,255,255,.06);padding:7px 14px;border-radius:999px;margin-bottom:16px}
+  .stars{letter-spacing:2px}
+  .hero p{color:var(--g4);font-size:15px;margin-bottom:22px;max-width:480px}
+  .btns{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:700;font-size:15px}
+  .btn-w{background:var(--w);color:var(--k)}
+  .btn-o{border:1px solid rgba(255,255,255,.4)}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{text-align:center;padding:22px 6px;border-right:1px solid var(--line)}
+  .stat:last-child{border:0}
+  .stat b{display:block;font-size:26px;font-weight:900;letter-spacing:-.03em}
+  .stat span{font-size:10.5px;color:var(--g3);text-transform:uppercase;letter-spacing:.14em}
+
+  section{padding:72px 20px}
+  .sec-h{margin-bottom:26px}
+  .sec-h h2{font-size:36px;font-weight:900;line-height:1;letter-spacing:-.04em}
+  .sec-h p{color:var(--g3);margin-top:10px;font-size:15px}
+  .light{background:var(--w);color:var(--k)}
+  .light .eyebrow{color:var(--g2)}
+  .light .sec-h p{color:var(--g2)}
+
+  /* PRECIOS */
+  .tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:18px;scrollbar-width:none}
+  .tab{flex:none;padding:9px 16px;border-radius:999px;border:1.5px solid var(--k);font-size:13px;font-weight:700}
+  .tab.on{background:var(--k);color:var(--w)}
+  .menu{border-top:1.5px solid var(--k)}
+  .item{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px solid #e3e3e3}
+  .item b{font-size:16px;font-weight:700}
+  .item small{display:block;font-size:12.5px;color:var(--g2);font-weight:500}
+  .item .p{font-weight:900;font-size:16px;white-space:nowrap}
+  .item .p em{font-style:normal;font-weight:500;font-size:11px;color:var(--g2);display:block;text-align:right}
+  .item .c{font-weight:600;font-size:13px;color:var(--g2)}
+  .note{font-size:12px;color:var(--g2);margin-top:12px}
+
+  /* RESERVAS */
+  .step{margin-bottom:22px}
+  .step h4{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:10px;display:flex;gap:10px;align-items:center}
+  .step h4 i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--w);color:var(--k);display:grid;place-items:center;font-size:11px;letter-spacing:0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:11px 15px;border-radius:14px;border:1px solid var(--g1);background:var(--k2);font-size:14px;font-weight:600;transition:.2s}
+  .chip small{display:block;font-size:11px;color:var(--g3);font-weight:500}
+  .chip.on{background:var(--w);color:var(--k);border-color:var(--w)}
+  .chip.on small{color:var(--g2)}
+  .chip.off{opacity:.3;text-decoration:line-through;pointer-events:none}
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .slots .chip{text-align:center;padding:11px 0}
+  .summary{margin-top:8px;border:1px solid var(--g1);border-radius:18px;padding:18px;background:var(--k2)}
+  .summary div{display:flex;justify-content:space-between;font-size:14px;padding:5px 0;color:var(--g3)}
+  .summary div b{color:var(--w)}
+  .confirm{width:100%;margin-top:14px;justify-content:center;background:var(--w);color:var(--k);opacity:.35;transition:.2s}
+  .confirm.ready{opacity:1}
+
+  /* GALERIA */
+  .gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:170px;gap:8px}
+  .gallery div{border-radius:14px;overflow:hidden}
+  .gallery .tall{grid-row:span 2}
+  .gallery img{filter:grayscale(1)}
+  .ig{display:inline-block;margin-top:16px;font-weight:700;border-bottom:1.5px solid}
+
+  /* RESEÑAS */
+  .reviews{display:grid;gap:12px}
+  .rev{border:1px solid #e3e3e3;border-radius:18px;padding:20px;background:#fff}
+  .rev q{display:block;font-size:17px;font-weight:600;line-height:1.35;margin:8px 0 10px;letter-spacing:-.01em}
+  .rev .who{font-size:12.5px;color:var(--g2)}
+
+  /* PANEL */
+  .panel{border:1px solid var(--g1);border-radius:22px;background:var(--k2);overflow:hidden}
+  .ph{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--g1);font-size:13px}
+  .ph b{font-weight:800}
+  .ph span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--g3);border:1px solid var(--g1);padding:4px 8px;border-radius:999px}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--g1)}
+  .kpi{padding:16px 12px;border-right:1px solid var(--g1)}
+  .kpi:last-child{border:0}
+  .kpi b{display:block;font-size:22px;font-weight:900;letter-spacing:-.03em}
+  .kpi span{font-size:10.5px;color:var(--g3);text-transform:uppercase;letter-spacing:.1em}
+  .bars{display:flex;align-items:flex-end;gap:6px;height:80px;padding:14px 16px 0}
+  .bars i{flex:1;background:var(--g1);border-radius:6px 6px 0 0}
+  .bars i.hi{background:var(--w)}
+  .days{display:flex;gap:6px;padding:6px 16px 14px;font-size:10px;color:var(--g3)}
+  .days span{flex:1;text-align:center}
+  .agenda{border-top:1px solid var(--g1)}
+  .ag{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--g1);font-size:13.5px}
+  .ag:last-child{border:0}
+  .ag time{font-weight:800}
+  .ag small{display:block;color:var(--g3);font-size:12px}
+  .tag{font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;border:1px solid var(--g2)}
+  .tag.ok{background:var(--w);color:var(--k);border-color:var(--w)}
+
+  .info{display:grid;gap:12px}
+  .info div{display:flex;gap:14px;align-items:flex-start;padding:16px;border:1px solid var(--line);border-radius:16px;font-size:14.5px}
+  .info b{display:block}
+  .info small{color:var(--g3)}
+
+  .cta{text-align:center;padding:84px 22px;background:var(--w);color:var(--k)}
+  .cta h2{font-size:40px;font-weight:900;letter-spacing:-.045em;line-height:1;margin-bottom:12px}
+  .cta p{color:var(--g2);margin-bottom:24px}
+  .cta .btn-w{background:var(--k);color:var(--w)}
+
+  footer{padding:28px 20px 110px;text-align:center;font-size:12px;color:var(--g2)}
+  .float-wa{position:fixed;right:16px;bottom:18px;z-index:30;width:58px;height:58px;border-radius:50%;background:var(--w);color:var(--k);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .wa{width:26px;height:26px}
+
+  @media(min-width:900px){
+    .hero h1{font-size:96px}.hero-c{padding:0 8vw 80px}
+    section{padding:110px 8vw}
+    .gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:240px}
+    .reviews{grid-template-columns:repeat(2,1fr)}
+    .slots{grid-template-columns:repeat(6,1fr)}
+    .menu,.booking,.panel,.info{max-width:720px}
+  }
+</style>
+</head>
+<body>
+<svg style="display:none"><symbol id="wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.8 9.9 5.2 16 5.2s11 4.6 11 10.6-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.9 1.1 3.5.9 4.1.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.7-.4z"/></symbol></svg>
+
+<div class="demo-bar">Demo de propuesta para <b>Esencia Studio</b> · hecha por Pixel Studio Bolivia</div>
+<nav><div class="logo">ESENCIA<small>STUDIO</small></div><a class="nav-cta" href="#reservar">Reservar</a></nav>
+
+<header class="hero">
+  <img src="img/logo.jpg" alt="Letrero de Esencia Studio en la pared del local">
+  <div class="hero-c">
+    <div class="eyebrow">Barbería · Centro de Santa Cruz</div>
+    <h1>Tu corte, <span>con detalle.</span></h1>
+    <div class="rating"><span class="stars">★★★★★</span> 5,0 · 89 reseñas en Google</div>
+    <p>Cortes personalizados, barba y tratamientos. Elige tu barbero y tu horario en segundos.</p>
+    <div class="btns">
+      <a class="btn btn-w" href="#reservar">Reservar turno</a>
+      <a class="btn btn-o" href="#precios">Ver precios</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>5,0★</b><span>En Google</span></div>
+  <div class="stat"><b>89</b><span>Reseñas</span></div>
+  <div class="stat"><b>9–21</b><span>Lun a sáb</span></div>
+</div>
+
+<section class="light" id="precios">
+  <div class="sec-h"><div class="eyebrow">Servicios y precios</div><h2>Elige tu servicio</h2><p>Todo en un solo menú, ordenado por categoría.</p></div>
+  <div class="tabs"><button class="tab on" data-t="cortes">Cortes</button><button class="tab" data-t="barba">Barba</button><button class="tab" data-t="quimicos">Químicos</button><button class="tab" data-t="extras">Extras</button></div>
+  <div class="menu" id="menu"></div>
+  <p class="note">Precios «desde», según Google Maps de Esencia Studio. «Consultar»: precio a confirmar.</p>
+</section>
+
+<section id="reservar">
+  <div class="sec-h"><div class="eyebrow">Reservas en línea</div><h2>Reserva en 4 pasos</h2><p>Sin esperar respuesta: eliges y confirmas.</p></div>
+  <div class="booking">
+    <div class="step"><h4><i>1</i>Servicio</h4><div class="chips" id="s-svc"></div></div>
+    <div class="step"><h4><i>2</i>Barbero</h4><div class="chips" id="s-bar"></div></div>
+    <div class="step"><h4><i>3</i>Día</h4><div class="chips" id="s-day"></div></div>
+    <div class="step"><h4><i>4</i>Hora</h4><div class="slots" id="s-hora"></div></div>
+    <div class="summary" id="sum">
+      <div>Servicio <b id="r-svc">—</b></div><div>Barbero <b id="r-bar">—</b></div><div>Fecha <b id="r-when">—</b></div>
+      <a class="btn confirm" id="go" href="#"><svg class="wa"><use href="#wa"/></svg>Confirmar reserva</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-h"><div class="eyebrow">Galería</div><h2>El estudio</h2></div>
+  <div class="gallery">
+    <div class="tall"><img src="img/sillas.jpg" alt="Sillas de Esencia Studio con capas del estudio"></div>
+    <div><img src="img/corte.jpg" alt="Detalle de un corte con desvanecido"></div>
+    <div><img src="img/logo.jpg" alt="Letrero de Esencia Studio"></div>
+  </div>
+  <a class="ig" href="https://www.instagram.com/esencia_studio_csz/" target="_blank" rel="noopener">Más cortes en Instagram →</a>
+</section>
+
+<section class="light">
+  <div class="sec-h"><div class="eyebrow">Opiniones</div><h2>5,0 en Google</h2><p>Lo que dicen sus clientes.</p></div>
+  <div class="reviews">
+    <div class="rev"><span class="stars">★★★★★</span><q>Muy buenísima atención y mucho detalle en los cortes, aparte de la personalización.</q><div class="who">Marco R. · Google</div></div>
+    <div class="rev"><span class="stars">★★★★★</span><q>100000/10, buen ambiente, buena mano profesional Juan, 100% recomendado.</q><div class="who">Ario G. · Google</div></div>
+    <div class="rev"><span class="stars">★★★★★</span><q>Increíble atención y corte espectacular.</q><div class="who">Grover C. · Google</div></div>
+    <div class="rev"><span class="stars">★★★★★</span><q>Muy buena la atención, el ambiente y full el corte 💯</q><div class="who">Alexander H. · Google</div></div>
+  </div>
+</section>
+
+<section id="panel">
+  <div class="sec-h"><div class="eyebrow">Panel del dueño</div><h2>Tu barbería, en tu celular</h2><p>Agenda del día, clientes y ganancias en un solo lugar.</p></div>
+  <div class="panel">
+    <div class="ph"><b>Hoy · Esencia Studio</b><span>Datos de ejemplo</span></div>
+    <div class="kpis">
+      <div class="kpi"><b>14</b><span>Reservas</span></div>
+      <div class="kpi"><b>78%</b><span>Ocupación</span></div>
+      <div class="kpi"><b>Bs 1.340</b><span>Estimado</span></div>
+    </div>
+    <div class="bars"><i style="height:45%"></i><i style="height:60%"></i><i style="height:52%"></i><i style="height:70%"></i><i style="height:88%"></i><i class="hi" style="height:100%"></i></div>
+    <div class="days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span></div>
+    <div class="agenda">
+      <div class="ag"><time>10:00</time><div>Corte desvanecido<small>Cliente nuevo · con Juan</small></div><span class="tag ok">Confirmada</span></div>
+      <div class="ag"><time>11:00</time><div>Corte + barba<small>Cliente frecuente · con Andrés</small></div><span class="tag ok">Confirmada</span></div>
+      <div class="ag"><time>12:00</time><div>Corte personalizado<small>Cliente nuevo · con Juan</small></div><span class="tag">Pendiente</span></div>
+      <div class="ag"><time>15:00</time><div>Alisado<small>Cliente frecuente · con Andrés</small></div><span class="tag ok">Confirmada</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contacto">
+  <div class="eyebrow">Te esperamos</div>
+  <h2>Reserva tu próximo corte</h2>
+  <p>Lunes a sábado de 9:00 a 21:00.</p>
+  <a class="btn btn-w" href="https://wa.me/59172309703?text=Hola%20Esencia%20Studio%2C%20quiero%20reservar%20un%20corte"><svg class="wa"><use href="#wa"/></svg>Escribir por WhatsApp</a>
+</section>
+
+<section style="padding-top:40px">
+  <div class="info">
+    <div>📍<span><b>Calle Velasco y Monseñor</b><small>Zona central, Santa Cruz de la Sierra</small><br><a href="https://maps.google.com/?cid=13683551375666165212" target="_blank" rel="noopener" style="border-bottom:1px solid">Cómo llegar</a></span></div>
+    <div>🕒<span><b>Lunes a sábado · 9:00 – 21:00</b><small>Domingo cerrado</small></span></div>
+    <div>📱<span><b>72309703</b><small>Celular y WhatsApp</small></span></div>
+  </div>
+</section>
+
+<footer>© Esencia Studio · Página demo creada por Pixel Studio Bolivia</footer>
+<a class="float-wa" href="https://wa.me/59172309703" aria-label="WhatsApp"><svg class="wa"><use href="#wa"/></svg></a>
+
+<script>
+const MENU={
+ cortes:[["Corte desvanecido","",80],["Corte con tijera","",100],["Corte de cabello largo","",100],["Corte personalizado","Asesoría según tu rostro y estilo",120],["Corte difuminado","",0],["Cortes para niños","",0],["Cabello con rizos","",0]],
+ barba:[["Recorte de barba","",40],["Mantenimiento de barba","",0],["Afeitado","",0],["Afeitado con navaja","",0],["Recorte de cejas","",0]],
+ quimicos:[["Alisado","",200],["Permanente","",200],["Tintura de cabello","",0],["Tratamiento capilar","",0]],
+ extras:[["Champú y acondicionador","",0],["Paquetes para novios","Para el gran día",0]]};
+const $=id=>document.getElementById(id);
+function drawMenu(k){$('menu').innerHTML=MENU[k].map(([n,d,p])=>`<div class="item"><div><b>${n}</b>${d?`<small>${d}</small>`:''}</div>${p?`<div class="p"><em>desde</em>Bs ${p}</div>`:'<div class="c">Consultar</div>'}</div>`).join('');
+ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.t===k));}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>drawMenu(t.dataset.t));drawMenu('cortes');
+
+// RESERVAS
+const SVC=[["Corte desvanecido","Bs 80"],["Corte personalizado","Bs 120"],["Corte + barba","Consultar"],["Recorte de barba","Bs 40"]];
+const BAR=[["Juan","Barbero"],["Andrés","Barbero"],["Cualquiera","El primero libre"]];
+const DN=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],MN=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const DAYS=[];{let d=new Date();while(DAYS.length<5){d=new Date(d.getTime()+864e5);if(d.getDay()!==0)DAYS.push(d)}}
+const HRS=['9:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','20:30'];
+const BUSY=[1,3,6,9];
+const S={svc:null,bar:null,day:null,hora:null};
+function chips(id,arr,key){$(id).innerHTML=arr.map((a,i)=>`<button class="chip${key==='hora'&&BUSY.includes(i)?' off':''}" data-i="${i}">${a[0]}${a[1]?`<small>${a[1]}</small>`:''}</button>`).join('');
+ $(id).querySelectorAll('.chip').forEach(c=>c.onclick=()=>pick(key,+c.dataset.i));}
+chips('s-svc',SVC,'svc');chips('s-bar',BAR,'bar');chips('s-day',DAYS.map(d=>[DN[d.getDay()]+' '+d.getDate(),MN[d.getMonth()]]),'day');chips('s-hora',HRS.map(h=>[h]),'hora');
+function pick(k,i){S[k]=i;const id={svc:'s-svc',bar:'s-bar',day:'s-day',hora:'s-hora'}[k];
+ $(id).querySelectorAll('.chip').forEach((c,j)=>c.classList.toggle('on',i!==null&&j===i));
+ $('r-svc').textContent=S.svc!=null?SVC[S.svc][0]:'—';$('r-bar').textContent=S.bar!=null?BAR[S.bar][0]:'—';
+ const d=S.day!=null?DAYS[S.day]:null;$('r-when').textContent=d?`${DN[d.getDay()]} ${d.getDate()} ${MN[d.getMonth()]}${S.hora!=null?' · '+HRS[S.hora]:''}`:'—';
+ const ok=Object.values(S).every(v=>v!=null);$('go').classList.toggle('ready',ok);
+ $('go').href=ok?'https://wa.me/59172309703?text='+encodeURIComponent(`Hola Esencia Studio, quiero reservar: ${SVC[S.svc][0]} con ${BAR[S.bar][0]}, el ${$('r-when').textContent}.`):'#';}
+function reset(){for(const k in S)S[k]=null;document.querySelectorAll('.booking .chip').forEach(c=>c.classList.remove('on'));pick('svc',null);drawMenu('cortes');}
+window.demo={pick,menu:drawMenu,reset,noop(){}};
+</script>
+</body>
+</html>

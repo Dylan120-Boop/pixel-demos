@@ -1,1 +1,21 @@
-{"nombre":"Día X de 30","total":30,"dias":[{"dia":1,"slug":"salon-de-belleza-laura","negocio":"Salón de Belleza Laura","contacto":"fijo 3 342 6351 (sin WhatsApp)","publicar":"2026-11-05"}]}
+{
+ "nombre": "Día X de 30",
+ "total": 30,
+ "dias": [
+  {
+   "dia": 1,
+   "slug": "salon-de-belleza-laura",
+   "negocio": "Salón de Belleza Laura",
+   "contacto": "fijo 3 342 6351 (sin WhatsApp)",
+   "publicar": "2026-11-05"
+  },
+  {
+   "dia": 2,
+   "slug": "esencia-studio",
+   "negocio": "Esencia Studio",
+   "contacto": "WhatsApp 72309703",
+   "formato": "ruleta (video_dia_ruleta.html)",
+   "publicar": "2026-11-05"
+  }
+ ]
+}
