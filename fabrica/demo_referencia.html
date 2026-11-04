@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botania · Salón de eventos en Santa Cruz</title>
+<style>
+  :root{
+    --bg:#0d1410; --bg2:#121c16; --ink:#f3efe6; --muted:#b9b4a6;
+    --gold:#d8b46a; --leaf:#5f8f62; --line:rgba(243,239,230,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .serif{font-family:Lora,Georgia,serif}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px 22px;
+      background:linear-gradient(to bottom,rgba(13,20,16,.85),rgba(13,20,16,0));}
+  .logo{font-family:Lora,serif;font-size:24px;letter-spacing:.04em}
+  .logo span{color:var(--gold)}
+  .nav-cta{font-size:13px;font-weight:600;border:1px solid var(--gold);color:var(--gold);padding:8px 14px;border-radius:999px}
+
+  /* HERO */
+  .hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+  .hero img{position:absolute;inset:0;transform:scale(1.06);animation:slow 14s ease-out forwards}
+  @keyframes slow{to{transform:scale(1)}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,20,16,.35) 0%,rgba(13,20,16,.35) 30%,rgba(13,20,16,.97) 85%)}
+  .hero-c{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:0 24px 56px}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .hero h1{font-family:Lora,serif;font-weight:500;font-size:46px;line-height:1.05;margin-bottom:16px}
+  .hero h1 em{color:var(--gold)}
+  .hero p{color:#e2ddd0;font-size:16px;max-width:520px;margin-bottom:24px}
+  .rating{display:inline-flex;align-items:center;gap:8px;font-size:14px;background:rgba(255,255,255,.08);border:1px solid var(--line);padding:7px 14px;border-radius:999px;margin-bottom:22px;backdrop-filter:blur(6px)}
+  .stars{color:#f5c451;letter-spacing:2px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:600;font-size:15px}
+  .btn-wa{background:#25d366;color:#08210f;box-shadow:0 10px 30px rgba(37,211,102,.35)}
+  .btn-ghost{border:1px solid rgba(255,255,255,.35)}
+  .wa-ic{width:20px;height:20px}
+
+  section{padding:76px 24px}
+  .sec-h{margin-bottom:30px}
+  .sec-h h2{font-family:Lora,serif;font-weight:500;font-size:34px;line-height:1.1}
+  .sec-h p{color:var(--muted);margin-top:10px}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:28px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}
+  .stat{text-align:center}
+  .stat b{display:block;font-family:Lora,serif;font-size:30px;color:var(--gold);font-weight:500}
+  .stat span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+  /* ESPACIOS */
+  .spaces{display:grid;gap:14px}
+  .space{position:relative;height:380px;border-radius:22px;overflow:hidden}
+  .space::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.8))}
+  .space .cap{position:absolute;left:20px;bottom:18px;z-index:2}
+  .space .cap small{color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:11px}
+  .space .cap h3{font-family:Lora,serif;font-weight:500;font-size:26px}
+  .space .cap p{font-size:14px;color:#ddd8cb}
+
+  /* EVENTOS */
+  .events{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ev{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:20px}
+  .ev .ic{font-size:26px;margin-bottom:10px}
+  .ev h4{font-size:16px;margin-bottom:4px}
+  .ev p{font-size:13px;color:var(--muted)}
+
+  /* GALERIA */
+  .gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:170px;gap:10px}
+  .gallery div{border-radius:14px;overflow:hidden}
+  .gallery .tall{grid-row:span 2}
+
+  /* RESEÑAS */
+  .reviews{display:grid;gap:14px}
+  .rev{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .rev q{font-family:Lora,serif;font-size:19px;line-height:1.4;display:block;margin:10px 0 12px;quotes:"“" "”"}
+  .rev .who{font-size:13px;color:var(--muted)}
+
+  /* CTA */
+  .cta{position:relative;overflow:hidden;text-align:center;padding:96px 24px}
+  .cta img{position:absolute;inset:0;opacity:.35}
+  .cta .in{position:relative;z-index:2}
+  .cta h2{font-family:Lora,serif;font-weight:500;font-size:36px;line-height:1.1;margin-bottom:14px}
+  .cta p{color:#e2ddd0;margin-bottom:26px}
+  .info{display:grid;gap:10px;margin-top:30px;font-size:14px;color:#ddd8cb}
+
+  footer{padding:30px 24px 110px;text-align:center;font-size:12px;color:#8c8778;border-top:1px solid var(--line)}
+
+  .float-wa{position:fixed;right:18px;bottom:20px;z-index:30;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.45);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+
+  @media(min-width:900px){
+    .hero h1{font-size:76px}.hero-c{padding:0 8vw 80px}
+    section{padding:110px 8vw}
+    .spaces{grid-template-columns:repeat(3,1fr)}
+    .events{grid-template-columns:repeat(4,1fr)}
+    .gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:230px}
+    .reviews{grid-template-columns:repeat(3,1fr)}
+  }
+</style>
+</head>
+<body>
+<svg style="display:none"><symbol id="wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.8 9.9 5.2 16 5.2s11 4.6 11 10.6-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.9 1.1 3.5.9 4.1.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.7-.4z"/></symbol></svg>
+
+<nav>
+  <div class="logo">Bot<span>a</span>nia</div>
+  <a class="nav-cta" href="#reservar">Reservar fecha</a>
+</nav>
+
+<header class="hero">
+  <img src="../botania/img/b0.jpg" alt="Salón Botania de noche, con el jardín iluminado">
+  <div class="hero-c">
+    <div class="eyebrow">Salón de eventos · Santa Cruz</div>
+    <h1>Celebra rodeado de <em>naturaleza</em> y luces</h1>
+    <div class="rating"><span class="stars">★★★★★</span> 4,8 · 36 reseñas en Google</div>
+    <p>Un salón con jardín, techo de luces y espacios para que tu boda, quinceaños o cumpleaños se vea como lo soñaste.</p>
+    <div class="btns">
+      <a class="btn btn-wa" href="https://wa.me/59176055555?text=Hola%20Botania%2C%20quiero%20consultar%20una%20fecha"><svg class="wa-ic"><use href="#wa"/></svg>Consultar por WhatsApp</a>
+      <a class="btn btn-ghost" href="#espacios">Ver espacios</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>100+</b><span>Invitados</span></div>
+  <div class="stat"><b>4,8★</b><span>En Google</span></div>
+  <div class="stat"><b>3</b><span>Ambientes</span></div>
+</div>
+
+<section id="espacios">
+  <div class="sec-h"><div class="eyebrow">Nuestros espacios</div><h2>Un lugar para cada momento</h2><p>Del cóctel en el jardín a la pista bajo las luces.</p></div>
+  <div class="spaces">
+    <div class="space"><img src="../botania/img/b1.jpg" alt="Salón principal con techo de luces"><div class="cap"><small>Salón principal</small><h3>Techo de luces</h3><p>Pista amplia y miles de luces cálidas.</p></div></div>
+    <div class="space"><img src="../botania/img/b5.jpg" alt="Jardín de noche"><div class="cap"><small>Al aire libre</small><h3>El jardín</h3><p>Césped, árboles y luz cálida para tus fotos.</p></div></div>
+    <div class="space"><img src="../botania/img/b2.jpg" alt="Árbol iluminado con el letrero de Botania"><div class="cap"><small>Rincón Botania</small><h3>El árbol</h3><p>El fondo perfecto para el recuerdo de la noche.</p></div></div>
+  </div>
+</section>
+
+<section style="background:var(--bg2)">
+  <div class="sec-h"><div class="eyebrow">Eventos</div><h2>¿Qué celebramos?</h2></div>
+  <div class="events">
+    <div class="ev"><div class="ic">💍</div><h4>Bodas</h4><p>Ceremonia y fiesta en un solo lugar.</p></div>
+    <div class="ev"><div class="ic">👑</div><h4>Quinceaños</h4><p>Una entrada de película.</p></div>
+    <div class="ev"><div class="ic">🎂</div><h4>Cumpleaños</h4><p>Íntimos o con toda la familia.</p></div>
+    <div class="ev"><div class="ic">🥂</div><h4>Corporativos</h4><p>Cenas, lanzamientos y fin de año.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-h"><div class="eyebrow">Galería</div><h2>Así se vive Botania</h2></div>
+  <div class="gallery">
+    <div class="tall"><img src="../botania/img/b6.jpg" alt="Jardín de día"></div>
+    <div><img src="../botania/img/b7.jpg" alt="Salón de vidrio iluminado"></div>
+    <div><img src="../botania/img/b3.jpg" alt="Entrada de Botania"></div>
+    <div class="tall"><img src="../botania/img/b2.jpg" alt="Árbol iluminado"></div>
+    <div><img src="../botania/img/b1.jpg" alt="Techo de luces"></div>
+    <div><img src="../botania/img/b0.jpg" alt="Salón y jardín de noche"></div>
+  </div>
+</section>
+
+<section style="background:var(--bg2)">
+  <div class="sec-h"><div class="eyebrow">Opiniones</div><h2>Lo que dicen nuestros clientes</h2></div>
+  <div class="reviews">
+    <div class="rev"><span class="stars">★★★★★</span><q>Un lugar muy bonito y muy ordenado. Perfecto para tener un bonito recuerdo de su fiesta.</q><div class="who">Yiyo P. · Google</div></div>
+    <div class="rev"><span class="stars">★★★★★</span><q>Salón de eventos fantástico, muy bonito y bien cuidado. Personal muy agradable.</q><div class="who">Luis M. · Google</div></div>
+    <div class="rev"><span class="stars">★★★★★</span><q>Amplio y bello lugar al aire libre. Excelente servicio.</q><div class="who">Mirtha R. · Google</div></div>
+  </div>
+</section>
+
+<section class="cta" id="reservar">
+  <img src="../botania/img/b7.jpg" alt="">
+  <div class="in">
+    <div class="eyebrow">Fechas disponibles</div>
+    <h2>Reserva tu fecha antes de que la ganen</h2>
+    <p>Escríbenos y te enviamos disponibilidad y paquetes.</p>
+    <a class="btn btn-wa" href="https://wa.me/59176055555?text=Hola%20Botania%2C%20quiero%20reservar%20una%20fecha"><svg class="wa-ic"><use href="#wa"/></svg>Reservar por WhatsApp</a>
+    <div class="info">
+      <div>📍 Zona Norte, Santa Cruz de la Sierra</div>
+      <div>📞 760 55555</div>
+      <div>🕒 Atención todos los días</div>
+    </div>
+  </div>
+</section>
+
+<footer>© Botania · Página demo creada por Pixel Studio Bolivia</footer>
+
+<a class="float-wa" href="https://wa.me/59176055555" aria-label="WhatsApp"><svg style="width:30px;height:30px;color:#fff"><use href="#wa"/></svg></a>
+</body>
+</html>
