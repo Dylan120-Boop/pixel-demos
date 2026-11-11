@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotización · Club de Natación Samix</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#071c4d;--blue:#0f4fd6;--sky:#e8f1ff;--yel:#ffd21f;--ink:#0b1430;--muted:#5b6785;--line:#dbe4f5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#eef2fa;line-height:1.5;font-size:14px}
+.page{max-width:820px;margin:24px auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(7,28,77,.12)}
+.d{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;letter-spacing:-.02em}
+header{background:var(--navy);color:#fff;padding:28px 32px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.pb{display:flex;align-items:center;gap:12px}.pb i{width:46px;height:46px;border-radius:12px;background:#fff;color:#000;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:20px}
+header h1{font-size:28px}header small{color:rgba(255,255,255,.7)}.meta{text-align:right;font-size:13px;color:rgba(255,255,255,.85)}.meta b{color:var(--yel)}
+.body{padding:28px 32px}
+h2{font-size:18px;margin:26px 0 10px;color:var(--navy)}h2:first-child{margin-top:0}
+p{color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin-top:6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:#f7f9fe}
+td.c{text-align:center;width:70px}td.r,th.r{text-align:right;white-space:nowrap}
+.ok{color:#137a37;font-weight:700}.no{color:#b7c0d4}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.plan{border:1.5px solid var(--line);border-radius:16px;padding:18px}.plan.rec{border-color:var(--blue);background:var(--sky);position:relative}
+.plan.rec:before{content:"Recomendado";position:absolute;top:-11px;left:16px;background:var(--yel);color:var(--navy);font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px}
+.plan h3{font-size:17px}.plan .p{font-size:30px;color:var(--blue);margin:6px 0}.plan .p small{font-size:13px;color:var(--muted);font-family:Inter}
+.plan ul{padding-left:18px;color:var(--ink)}.plan li{margin:3px 0}
+.tot{margin-top:12px;background:var(--navy);color:#fff;border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.tot b{font-size:26px;color:var(--yel)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{background:#f7f9fe;border:1px solid var(--line);border-radius:14px;padding:16px}.box ul{padding-left:18px}.box li{margin:3px 0}
+footer{padding:20px 32px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+footer a{color:var(--blue);font-weight:600}
+@media(max-width:640px){.plans,.cols{grid-template-columns:1fr}header,.body,footer{padding:22px 18px}.meta{text-align:left}td,th{padding:8px}}
+@media print{body{background:#fff}.page{box-shadow:none;margin:0;border-radius:0;max-width:none}@page{size:A4;margin:10mm}h2{break-after:avoid}.plans,.tot,.cols,tr{break-inside:avoid}td,th{padding:7px 10px}body{font-size:13px}}
+</style></head><body>
+<div class="page">
+<header>
+ <div class="pb"><i>PB</i><div><h1 class="d">Cotización</h1><small>Página web · Club de Natación Samix</small></div></div>
+ <div class="meta">Para: <b>Club de Natación Samix</b><br>Fecha: 11 de noviembre de 2026<br>Validez: 15 días<br>Pixel Studio Bolivia · Santa Cruz</div>
+</header>
+<div class="body">
+
+<h2 class="d">Propuesta</h2>
+<p>Una página web propia para el club, pensada para el celular, donde padres y nadadores encuentren los programas y horarios, vean la trayectoria del club y se inscriban en minutos con un mensaje directo al WhatsApp del club. Vista previa: <a href="https://dylan120-boop.github.io/pixel-demos/club-samix/" style="color:var(--blue);font-weight:600">dylan120-boop.github.io/pixel-demos/club-samix</a></p>
+
+<h2 class="d">Opciones</h2>
+<div class="plans">
+ <div class="plan">
+  <h3>Página informativa</h3>
+  <div class="p d">400 Bs <small>pago único</small></div>
+  <ul><li>Inicio, programas y horarios (fijos)</li><li>Galería de fotos y trayectoria</li><li>Botón de WhatsApp y ubicación en Maps</li><li>Preguntas frecuentes</li></ul>
+ </div>
+ <div class="plan rec">
+  <h3>Web con inscripciones y panel</h3>
+  <div class="p d">1.500 Bs <small>pago único</small></div>
+  <ul><li>Todo lo de la página informativa</li><li>Horarios por programa con cupos</li><li>Inscripción en 3 pasos que llega al WhatsApp del club</li><li>Panel para que el club cambie horarios, cupos y fotos sin depender de nadie</li></ul>
+ </div>
+</div>
+
+<h2 class="d">Detalle de lo incluido</h2>
+<table>
+<tr><th>Componente</th><th class="c">Informativa</th><th class="c">Con inscripciones</th></tr>
+<tr><td>Diseño a medida con los colores y el logo del club, adaptado a celular y computadora</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Sección de programas (matronatación, escuela, adultos, competitivo, máster)</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Horarios</td><td class="c">Fijos</td><td class="c ok">Por pestañas y con cupos</td></tr>
+<tr><td>Galería de fotos de la piscina, entrenamientos y torneos</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Trayectoria y logros del club</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Preguntas frecuentes</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Botón de WhatsApp flotante y ubicación en Google Maps</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Formulario de inscripción en 3 pasos (programa → turno → datos) que envía todo ordenado al WhatsApp del club</td><td class="c no">—</td><td class="c ok">✓</td></tr>
+<tr><td>Panel de administración: editar horarios, cupos, programas y fotos</td><td class="c no">—</td><td class="c ok">✓</td></tr>
+<tr><td>Optimización básica para aparecer en Google («natación Santa Cruz»)</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Hasta 2 rondas de cambios antes de publicar</td><td class="c ok">✓</td><td class="c ok">✓</td></tr>
+<tr><td>Capacitación corta para usar el panel (por videollamada o presencial)</td><td class="c no">—</td><td class="c ok">✓</td></tr>
+</table>
+
+<div class="tot"><span>Total opción recomendada</span><b class="d">1.500 Bs</b></div>
+
+<h2 class="d">Condiciones</h2>
+<div class="cols">
+ <div class="box"><b>Forma de pago</b><ul><li>50 % al aprobar la propuesta</li><li>50 % al entregar la página</li><li>QR o transferencia bancaria</li></ul></div>
+ <div class="box"><b>Plazo y proceso</b><ul><li>Entrega en 7 a 10 días hábiles desde que recibimos fotos y datos</li><li>El club nos envía: logo, fotos, programas, horarios y precios</li><li>Revisión del club y ajustes antes de publicar</li></ul></div>
+</div>
+<div class="box" style="margin-top:14px"><b>No incluido</b><ul><li>Dominio propio (ej. clubsamix.com) y alojamiento: se cotizan aparte según el dominio que elija el club. La página puede publicarse sin costo mientras tanto.</li><li>Pagos en línea con tarjeta o QR automático.</li><li>Fotografía o video profesional.</li></ul></div>
+
+</div>
+<footer><div><b>Pixel Studio Bolivia</b> · Páginas web para negocios en Santa Cruz</div><div>WhatsApp <a href="https://wa.me/59176113430">7611 3430</a></div></footer>
+</div>
+</body></html>

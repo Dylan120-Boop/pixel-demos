@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Club de Natación Samix · Santa Cruz</title>
+<meta name="description" content="Escuela y equipo de natación en Santa Cruz de la Sierra. Clases por niveles, equipo competitivo y máster. Inscripciones por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#071c4d;--blue:#0f4fd6;--blue2:#2f7bff;--sky:#e8f1ff;--yel:#ffd21f;--ink:#0b1430;--muted:#5b6785;--line:#dbe4f5;--card:#fff;--bg:#f5f8ff}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+.d{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;letter-spacing:-.02em}
+.demo{position:fixed;top:0;left:0;right:0;z-index:40;background:var(--yel);color:var(--navy);font-size:11px;font-weight:600;text-align:center;padding:6px 10px}
+nav{position:fixed;top:27px;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;transition:.25s}
+nav.s{background:rgba(7,28,77,.92);backdrop-filter:blur(10px)}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px}
+.mark{width:38px;height:38px;border-radius:50%;background:var(--blue);display:grid;place-items:center;color:var(--yel);font-size:22px;border:2px solid var(--yel);font-family:'Bricolage Grotesque';font-weight:800}
+.nav-cta{font-size:13px;font-weight:700;background:var(--yel);color:var(--navy);padding:9px 15px;border-radius:999px}
+.hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;background:linear-gradient(180deg,#071c4d 0%,#0b3a9e 55%,#0f4fd6 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:130px 22px 120px}
+.lanes{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 70px,rgba(255,255,255,.05) 70px 72px)}
+.lanes:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 34px,rgba(255,210,31,.0) 34px)}
+.wave{position:absolute;left:0;right:0;bottom:-2px;height:90px}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--yel);margin-bottom:12px}
+.hero h1{position:relative;font-size:46px;line-height:1.02;margin-bottom:16px}.hero h1 em{font-style:normal;color:var(--yel)}
+.hero p{position:relative;color:rgba(255,255,255,.88);font-size:16px;max-width:540px;margin-bottom:24px}
+.tags{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.tags span{font-size:12px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:999px}
+.btns{position:relative;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-weight:700;font-size:15px;border:0}
+.btn-y{background:var(--yel);color:var(--navy);box-shadow:0 12px 30px rgba(255,210,31,.3)}.btn-g{border:1px solid rgba(255,255,255,.5);color:#fff}
+.btn-wa{background:#25d366;color:#05230f}.wa-ic{width:20px;height:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:-60px 16px 0;position:relative;z-index:2;background:#fff;border-radius:22px;padding:20px 10px;box-shadow:0 20px 50px rgba(7,28,77,.12)}
+.stat{text-align:center}.stat b{display:block;font-size:26px;color:var(--blue)}.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+section{padding:72px 22px}.sec-h{margin-bottom:26px}.sec-h .eyebrow{color:var(--blue)}.sec-h h2{font-size:34px;line-height:1.08}.sec-h p{color:var(--muted);margin-top:10px}
+.progs{display:grid;gap:12px}
+.prog{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;gap:16px}
+.prog .ic{flex:none;width:54px;height:54px;border-radius:16px;background:var(--sky);display:grid;place-items:center;font-size:27px}
+.prog h3{font-size:18px}.prog .age{font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em}.prog p{font-size:14px;color:var(--muted);margin-top:4px}
+.note{font-size:12px;color:var(--muted);margin-top:14px;font-style:italic}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;scrollbar-width:none}
+.tab{flex:none;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:600;font-size:14px;color:var(--muted)}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.sched{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:center}.row:last-child{border:0}
+.row b{font-size:15px}.row small{display:block;color:var(--muted);font-size:12px}.row .cup{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#e6f8ec;color:#137a37}.row .cup.low{background:#fff4d1;color:#8a6200}
+.team{background:var(--navy);color:#fff}.team .sec-h .eyebrow{color:var(--yel)}.team .sec-h p{color:rgba(255,255,255,.7)}
+.ach{display:grid;gap:12px}.a{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);border-radius:18px;padding:18px;display:flex;gap:14px;align-items:flex-start}
+.a .yr{flex:none;font-family:'Bricolage Grotesque';font-weight:800;color:var(--navy);background:var(--yel);border-radius:10px;padding:4px 9px;font-size:14px}.a p{font-size:14px;color:rgba(255,255,255,.75)}
+.gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:150px;gap:10px}
+.ph{border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:13px;font-weight:600;color:#fff;padding:12px;background:linear-gradient(160deg,var(--blue2),var(--navy))}
+.ph span{font-size:32px}.ph.tall{grid-row:span 2}.ph.y{background:linear-gradient(160deg,#ffe36b,var(--yel));color:var(--navy)}.ph.lt{background:var(--sky);color:var(--navy)}
+.steps{display:flex;gap:6px;margin-bottom:16px}.steps i{flex:1;height:5px;border-radius:9px;background:var(--line)}.steps i.on{background:var(--blue)}
+.box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.box h3{font-size:20px;margin-bottom:4px}.box .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+.opts{display:grid;gap:8px}.opt{text-align:left;width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.opt small{color:var(--muted);font-weight:500}.opt.on{border-color:var(--blue);background:var(--sky)}
+.field{display:block;margin-bottom:12px}.field span{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.field input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);font:inherit;font-size:16px}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:16px}.back{background:none;border:0;color:var(--muted);font-weight:600}
+.summary{background:var(--sky);border-radius:14px;padding:14px 16px;font-size:14px;margin-bottom:14px}.summary div{display:flex;justify-content:space-between;padding:3px 0}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:10px}.faq summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between}.faq summary:after{content:"+";color:var(--blue);font-size:20px;line-height:1}.faq details[open] summary:after{content:"–"}.faq p{color:var(--muted);font-size:14px;margin-top:8px}
+.cta{text-align:center;padding:86px 22px;background:linear-gradient(180deg,#0f4fd6,#071c4d);color:#fff}
+.cta h2{font-size:36px;line-height:1.08;margin-bottom:12px}.cta p{color:rgba(255,255,255,.85);margin-bottom:24px}
+.info{display:grid;gap:8px;margin-top:28px;font-size:14px;color:rgba(255,255,255,.9)}
+footer{padding:28px 22px 110px;text-align:center;font-size:12px;color:var(--muted)}
+.float-wa{position:fixed;right:18px;bottom:20px;z-index:30;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+@media(min-width:900px){.hero{padding:0 8vw 140px}.hero h1{font-size:80px}section{padding:100px 8vw}.progs{grid-template-columns:repeat(3,1fr)}.ach{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:210px}.stats{max-width:760px;margin:-60px auto 0}.box,.sched,.faq{max-width:720px}}
+</style></head>
+<body>
+<svg style="display:none"><symbol id="wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.8 9.9 5.2 16 5.2s11 4.6 11 10.6-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.9 1.1 3.5.9 4.1.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.7-.4z"/></symbol></svg>
+<div class="demo">Vista previa de propuesta para Club de Natación Samix · hecha por Pixel Studio Bolivia</div>
+<nav id="nav"><div class="logo d"><div class="mark">S</div>Samix</div><a class="nav-cta" href="#inscripcion">Inscribirme</a></nav>
+
+<header class="hero">
+<div class="lanes"></div>
+<div class="eyebrow" style="position:relative">Club de natación · Santa Cruz de la Sierra</div>
+<h1 class="d">Aprende, entrena y <em>compite</em> con Samix</h1>
+<div class="tags"><span>🏊 Piscina de 25 m</span><span>🏆 Equipo federado</span><span>👶 Desde los más pequeños</span></div>
+<p>Escuela de natación por niveles, equipo competitivo y grupo máster. Elige tu horario e inscríbete en minutos.</p>
+<div class="btns"><a class="btn btn-y" href="#inscripcion">Inscribirme ahora</a><a class="btn btn-g" href="#programas">Ver programas</a></div>
+<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#f5f8ff" d="M0 40c120 30 240 30 360 0s240-30 360 0 240 30 360 0 240-30 360 0v50H0z"/></svg>
+</header>
+<div class="stats"><div class="stat"><b class="d">25 m</b><span>Piscina</span></div><div class="stat"><b class="d">5</b><span>Programas</span></div><div class="stat"><b class="d">Liga A</b><span>FEBODA</span></div></div>
+
+<section id="programas">
+<div class="sec-h"><div class="eyebrow">Programas</div><h2 class="d">Un lugar en el agua para cada edad</h2><p>Del primer chapuzón a la competencia nacional.</p></div>
+<div class="progs">
+<div class="prog"><div class="ic">👶</div><div><div class="age">Bebés y peques</div><h3>Matronatación</h3><p>Primer contacto con el agua junto a mamá o papá, jugando y con confianza.</p></div></div>
+<div class="prog"><div class="ic">🐠</div><div><div class="age">Niños</div><h3>Escuela de natación</h3><p>Aprenden los cuatro estilos paso a paso, en grupos por nivel.</p></div></div>
+<div class="prog"><div class="ic">🏊</div><div><div class="age">Adultos</div><h3>Natación para adultos</h3><p>Aprende desde cero o mejora tu técnica, a tu ritmo.</p></div></div>
+<div class="prog"><div class="ic">🏆</div><div><div class="age">Selección</div><h3>Equipo competitivo</h3><p>Entrenamiento para torneos departamentales y nacionales.</p></div></div>
+<div class="prog"><div class="ic">⏱️</div><div><div class="age">+25 años</div><h3>Grupo máster</h3><p>Entrena con un grupo y compite en las categorías máster.</p></div></div>
+</div>
+<p class="note">Programas de ejemplo para la vista previa: se ajustan a los niveles, edades y precios reales del club.</p>
+</section>
+
+<section style="background:#fff">
+<div class="sec-h"><div class="eyebrow">Horarios</div><h2 class="d">Elige tu turno</h2><p>Cupos actualizados por el club desde su panel.</p></div>
+<div class="tabs" id="tabs"></div>
+<div class="sched" id="sched"></div>
+<p class="note">Horarios de ejemplo.</p>
+</section>
+
+<section>
+<div class="sec-h"><div class="eyebrow">Galería</div><h2 class="d">La piscina y el equipo</h2><p>Aquí irán las fotos reales del club, entrenamientos y torneos.</p></div>
+<div class="gallery"><div class="ph tall"><span>🏊</span>Piscina 25 m</div><div class="ph y"><span>🏅</span>Podios</div><div class="ph lt"><span>🐠</span>Escuelita</div><div class="ph tall y"><span>🤽</span>Entrenamientos</div><div class="ph lt"><span>⏱️</span>Grupo máster</div><div class="ph"><span>💙</span>Familia Samix</div></div>
+</section>
+
+<section class="team">
+<div class="sec-h"><div class="eyebrow">Trayectoria</div><h2 class="d">Un club que compite</h2><p>Samix participa en los campeonatos de la Federación Boliviana de Deportes Acuáticos.</p></div>
+<div class="ach">
+<div class="a"><div class="yr">2024</div><div><b>Sede del Nacional Interclubes</b><p>La piscina de 25 m de Samix recibió el campeonato nacional interclubes.</p></div></div>
+<div class="a"><div class="yr">2025</div><div><b>Sede del Nacional Máster</b><p>Nadadores máster de todo el país compitieron en casa.</p></div></div>
+<div class="a"><div class="yr">2025</div><div><b>Liga A nacional</b><p>Samix Santa Cruz entre los clubes de la máxima liga del país.</p></div></div>
+</div>
+<p class="note" style="color:rgba(255,255,255,.6)">El club puede sumar aquí sus logros, récords y nadadores destacados.</p>
+</section>
+
+<section id="inscripcion">
+<div class="sec-h"><div class="eyebrow">Inscripción en línea</div><h2 class="d">Inscríbete en 3 pasos</h2><p>Llega directo al WhatsApp del club con todos los datos.</p></div>
+<div class="box">
+<div class="steps"><i class="on"></i><i></i><i></i></div>
+<div id="step"></div>
+</div>
+</section>
+
+<section style="background:#fff" class="faq">
+<div class="sec-h"><div class="eyebrow">Preguntas frecuentes</div><h2 class="d">Antes de tu primera clase</h2></div>
+<details><summary>¿Qué necesito llevar?</summary><p>Traje de baño, gorra, lentes de natación, toalla y sandalias.</p></details>
+<details><summary>¿Hay clase de prueba?</summary><p>Escríbenos y coordinamos una clase para conocer el nivel de tu hijo o el tuyo.</p></details>
+<details><summary>¿Cómo sé en qué nivel empezar?</summary><p>El entrenador evalúa al nadador en la primera clase y lo ubica en su grupo.</p></details>
+<details><summary>¿Cómo se paga la mensualidad?</summary><p>El club te indica las formas de pago (QR, transferencia o efectivo) al confirmar.</p></details>
+</section>
+
+<section class="cta" id="reservar">
+<div class="eyebrow">Temporada abierta</div><h2 class="d">¿Listo para tirarte al agua?</h2><p>Escríbenos y te contamos horarios, cupos y mensualidades.</p>
+<a class="btn btn-wa wa-link" data-msg="Hola Samix, quiero información sobre las clases de natación"><svg class="wa-ic"><use href="#wa"/></svg>Escribir por WhatsApp</a>
+<div class="info"><div>📍 Santa Cruz de la Sierra, Bolivia</div><div>🏊 Piscina semiolímpica de 25 metros</div></div>
+</section>
+<footer>© Club de Natación Samix · Página demo creada por Pixel Studio Bolivia</footer>
+<a class="float-wa wa-link" data-msg="Hola Samix, quiero información sobre las clases" aria-label="WhatsApp"><svg style="width:30px;height:30px;color:#fff"><use href="#wa"/></svg></a>
+
+<script>
+// Número de WhatsApp del club (cambiar al real antes de publicar)
+const WA='59100000000';
+const wa=m=>'https://wa.me/'+WA+'?text='+encodeURIComponent(m);
+document.querySelectorAll('.wa-link').forEach(a=>{a.href=wa(a.dataset.msg);a.target='_blank'});
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s',scrollY>40));
+
+const H={
+ 'Escuela niños':[['Lun · Mié · Vie','15:00 – 16:00','Nivel inicial',6],['Lun · Mié · Vie','16:00 – 17:00','Nivel intermedio',2],['Mar · Jue','17:00 – 18:00','Nivel avanzado',4],['Sábado','09:00 – 10:30','Todos los niveles',8]],
+ 'Adultos':[['Lun · Mié · Vie','06:30 – 07:30','Aprende a nadar',5],['Mar · Jue','19:00 – 20:00','Técnica',3],['Sábado','08:00 – 09:00','Libre guiado',7]],
+ 'Matronatación':[['Mar · Jue','10:00 – 10:45','6 meses a 3 años',3],['Sábado','10:30 – 11:15','6 meses a 3 años',1]],
+ 'Competitivo':[['Lun a vie','05:30 – 07:30','Con evaluación previa',0],['Lun a vie','17:30 – 19:30','Con evaluación previa',0]],
+ 'Máster':[['Lun · Mié · Vie','20:00 – 21:00','Desde 25 años',9],['Sábado','07:00 – 08:30','Fondo',6]]
+};
+const tabs=document.getElementById('tabs'),sched=document.getElementById('sched');
+function show(k){
+ tabs.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.textContent===k));
+ sched.innerHTML=H[k].map(r=>`<div class="row"><div><b>${r[0]} · ${r[1]}</b><small>${r[2]}</small></div><span class="cup ${r[3]&&r[3]<4?'low':''}">${r[3]?r[3]+' cupos':'Selección'}</span></div>`).join('');
+}
+Object.keys(H).forEach(k=>{const b=document.createElement('button');b.className='tab';b.textContent=k;b.onclick=()=>show(k);tabs.appendChild(b)});
+show('Escuela niños');
+
+// Inscripción en 3 pasos
+const S={prog:null,turno:null,nom:'',edad:''};let n=0;
+const stepEl=document.getElementById('step'),bars=document.querySelectorAll('.steps i');
+function render(){
+ bars.forEach((b,i)=>b.classList.toggle('on',i<=n));
+ if(n===0){stepEl.innerHTML='<h3 class="d">¿Qué programa te interesa?</h3><p class="sub">Paso 1 de 3</p><div class="opts">'+Object.keys(H).map(k=>`<button class="opt ${S.prog===k?'on':''}" data-k="${k}">${k}<small>${H[k].length} turnos</small></button>`).join('')+'</div>';
+  stepEl.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{S.prog=o.dataset.k;S.turno=null;n=1;render()});}
+ if(n===1){stepEl.innerHTML='<h3 class="d">Elige el turno</h3><p class="sub">Paso 2 de 3 · '+S.prog+'</p><div class="opts">'+H[S.prog].map((r,i)=>`<button class="opt" data-i="${i}">${r[0]} · ${r[1]}<small>${r[2]}</small></button>`).join('')+'</div><div class="nav2"><button class="back">← Volver</button></div>';
+  stepEl.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{const r=H[S.prog][o.dataset.i];S.turno=r[0]+' '+r[1];n=2;render()});
+  stepEl.querySelector('.back').onclick=()=>{n=0;render()};}
+ if(n===2){stepEl.innerHTML=`<h3 class="d">Datos del nadador</h3><p class="sub">Paso 3 de 3</p><div class="summary"><div><span>Programa</span><b>${S.prog}</b></div><div><span>Turno</span><b>${S.turno}</b></div></div><label class="field"><span>Nombre del nadador</span><input id="nom" placeholder="Ej. Mateo Rojas"></label><label class="field"><span>Edad</span><input id="edad" inputmode="numeric" placeholder="Ej. 8"></label><div class="nav2"><button class="back">← Volver</button><a class="btn btn-wa" id="go"><svg class="wa-ic"><use href="#wa"/></svg>Enviar inscripción</a></div>`;
+  stepEl.querySelector('.back').onclick=()=>{n=1;render()};
+  stepEl.querySelector('#go').onclick=e=>{const nom=document.getElementById('nom').value.trim()||'(sin nombre)',ed=document.getElementById('edad').value.trim()||'-';e.currentTarget.href=wa(`Hola Samix, quiero inscribir a:\n• Nadador: ${nom} (${ed} años)\n• Programa: ${S.prog}\n• Turno: ${S.turno}`);e.currentTarget.target='_blank'};}
+}
+render();
+</script>
+</body></html>
